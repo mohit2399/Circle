@@ -1,44 +1,29 @@
+#include "SFML/Graphics.hpp"
 #include <iostream>
+
 using namespace std;
 
-class CAT{
-public:
-    CAT() {
-        itsAge = 1;
-        itsWeight = 5;
-    }
-        ~CAT();
-        int GetAge() const {
-            return itsAge;
-        };
 
- const int GetWeight(){
-        return itsWeight;
-    }
- void SetAge(int age){ itsAge =age;}
-private:
-    int itsAge;
-    int itsWeight;
+int main()
+{
+    sf::RenderWindow window(sf::VideoMode(600, 600), "SFML WORKS!");
+    sf::RectangleShape rectangle(sf::Vector2f(200, 40));
+    rectangle.setFillColor(sf::Color(0, 255, 0));
+    while (window.isOpen())
+    {
+        sf::Event event;
 
-};
-CAT :: ~CAT(){
-    cout << "Destructer called!";
-}
-int main(){
-    CAT *Family = new CAT[500];
-    int i;
-    CAT * pCAT;
-    for(i=0; i<500; i++){
-        pCAT = new CAT;
-        pCAT->SetAge(2*i +1);
-        Family[i] = *pCAT;
-        delete pCAT;
-   }
-    for(i=0; i<500; i++){
-        cout << "Cat #" << i+1 << ": ";
-        cout << Family[i]->GetAge() << endl;
+        while (window.pollEvent(event))
+        {
+            switch (event.type)
+            {
+                case sf::Event::Closed:
+                    window.close();
 
+                    break;
+            }
+        }
+        window.clear();
+        window.display();
     }
-    delete [] Family;
-    return 0;
 }
